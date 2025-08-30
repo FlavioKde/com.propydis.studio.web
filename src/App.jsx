@@ -1,22 +1,30 @@
-import { useEffect, useState } from 'react'
-//import reactLogo from './assets/react.svg'
-import api from '/src/api/axios.js';
+import { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/Login";
+
+function Dashboard() {
+  return <h1 className="text-3xl p-4">Bienvenido al Dashboard 🚀</h1>;
+}
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    api.get("/hello") // suponiendo que tu backend tenga un endpoint simple
-      .then(res => setMessage(res.data))
-      .catch(err => setMessage("Error conectando al backend"));
-  }, []);
-
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Frontend conectado 🚀</h1>
-      <p>Respuesta del backend: {message}</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {!isLoggedIn ? (
+          <Route
+            path="/login"
+            element={<Login onLogin={() => setIsLoggedIn(true)} />}
+          />
+        ) : (
+          <Route path="/dashboard" element={<Dashboard />} />
+        )}
+        <Route
+          path="*"
+          element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App
+export default App;
