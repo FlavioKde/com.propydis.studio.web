@@ -7,10 +7,6 @@ function Dashboard() {
 }
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("token")
-  );
-
   return (
     <BrowserRouter>
       <Routes>
