@@ -3,7 +3,12 @@ import { useAuth } from "../context/AuthContext";
 
 export default function PrivateRoute({ children }) {
   const { user } = useAuth();
-  // If user is logged in, render the children components
-  // Otherwise, redirect to the home page
-  return user ? children : <Navigate to="/" />;
+
+  // Si no hay usuario logueado → redirige a login
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  // Si hay usuario → renderiza el contenido protegido
+  return children;
 }

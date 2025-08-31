@@ -9,6 +9,7 @@ import Properties from "./pages/Properties";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
+import Login from "./pages/Login";
 import AdminProperties from "./pages/AdminProperties";
 import AdminProjects from "./pages/AdminProjects";
 import AdminContacts from "./pages/AdminContacts";
@@ -28,6 +29,7 @@ function App() {
           <Route path="/properties" element={<Properties />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
 
           {/* Admin */}
           <Route

@@ -9,14 +9,16 @@ export function AuthProvider({ children }) {
     const token = localStorage.getItem("token");
     if (token) {
       const payload = JSON.parse(atob(token.split(".")[1]));
-      setUser({ username: payload.sub, role: payload.role });
+      setUser({ username: payload.sub,
+         roles: payload.roles || [] });
     }
   }, []);
 
   const login = (token) => {
     localStorage.setItem("token", token);
     const payload = JSON.parse(atob(token.split(".")[1]));
-    setUser({ username: payload.sub, role: payload.role });
+    setUser({ username: payload.sub, 
+      roles: payload.roles || [] });
   };
 
   const logout = () => {
