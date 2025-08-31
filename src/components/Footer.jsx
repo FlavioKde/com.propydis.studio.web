@@ -2,29 +2,44 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-blue-900 text-white py-6 mt-10">
-      <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
-        
-        {/* Logo / Nombre */}
-        <div className="font-bold text-lg">
-          <Link to="/" className="hover:text-gray-300">PropyDis Studio</Link>
+    <footer className="py-16 px-4 max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+      
+        <div className="p-6 border rounded shadow hover:shadow-lg transition">
+          <h3 className="text-xl font-semibold mb-2 text-blue-900">Propiedades</h3>
+          <p className="text-gray-600 mb-4">
+            Explora nuestra selección de propiedades exclusivas.
+          </p>
+          <Link to="/properties" className="text-blue-700 hover:underline">
+            Ver más →
+          </Link>
         </div>
 
-        {/* Navegación rápida */}
-        <nav>
-          <ul className="flex flex-wrap gap-4 justify-center">
-            <li><Link to="/properties" className="hover:text-gray-300">Properties</Link></li>
-            <li><Link to="/projects" className="hover:text-gray-300">Projects</Link></li>
-            <li><Link to="/contact" className="hover:text-gray-300">Contact</Link></li>
-          </ul>
-        </nav>
+        <div className="p-6 border rounded shadow hover:shadow-lg transition">
+          <h3 className="text-xl font-semibold mb-2 text-blue-900">Proyectos</h3>
+          <p className="text-gray-600 mb-4">
+            Descubre nuestros proyectos en desarrollo.
+          </p>
+          <Link to="/projects" className="text-blue-700 hover:underline">
+            Ver más →
+          </Link>
+        </div>
+
+        <div className="p-6 border rounded shadow hover:shadow-lg transition">
+          <h3 className="text-xl font-semibold mb-2 text-blue-900">Contacto</h3>
+          <p className="text-gray-600 mb-4">
+            Hablemos sobre tu próximo proyecto.
+          </p>
+          <Link to="/contact" className="text-blue-700 hover:underline">
+            Ir a contacto →
+          </Link>
+        </div>
 
         {/* Info de contacto */}
         <div className="text-sm text-gray-300 text-center md:text-right">
           <p>© {new Date().getFullYear()} PropyDis Studio</p>
           <p>Email: contacto@propydis.com</p>
         </div>
-      </div>
+      
     </footer>
   );
 }

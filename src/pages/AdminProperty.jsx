@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 
-export default function AdminProjects() {
-  const [projects, setProjects] = useState([]);
+export default function AdminProperty() {
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    api.get("/admin/projects")
-      .then(res => setProjects(res.data))
+    api.get("/admin/properties")
+      .then(res => setProperties(res.data))
       .catch(err => console.error(err));
   }, []);
 
   return (
     <div>
-      <h1>Gestión de Projectos</h1>
+      <h1>Gestión de Propiedades</h1>
       <ul>
-        {projects.map(p => (
+        {properties.map(p => (
           <li key={p.id}>{p.name}</li>
         ))}
       </ul>

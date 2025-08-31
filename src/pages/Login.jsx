@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import HeaderWeb from "../components/HeaderWeb";
 import axios from "axios";
 
 export default function Login() {
@@ -38,6 +39,8 @@ export default function Login() {
   };
 
   return (
+    <>
+    <HeaderWeb />
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form
         onSubmit={handleSubmit}
@@ -77,5 +80,6 @@ export default function Login() {
         </button>
       </form>
     </div>
+    </>
   );
 }
