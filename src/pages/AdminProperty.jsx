@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 
 export default function AdminProperty() {
-  const [properties, setProperties] = useState([]);
+  const [property, setProperty] = useState([]);
 
   useEffect(() => {
-    api.get("/admin/properties")
-      .then(res => setProperties(res.data))
+    api.get("/admin/property")
+      .then(res => setProperty(res.data))
       .catch(err => console.error(err));
   }, []);
 

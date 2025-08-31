@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 
 export default function AdminProject() {
-  const [projects, setProjects] = useState([]);
+  const [project, setProject] = useState([]);
 
   useEffect(() => {
-    api.get("/admin/projects")
-      .then(res => setProjects(res.data))
+    api.get("/admin/project")
+      .then(res => setProject(res.data))
       .catch(err => console.error(err));
   }, []);
 
