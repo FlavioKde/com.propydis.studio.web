@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import HeaderWeb from "../components/HeaderWeb";
+
 
 
 export default function Property() {
   return(
   <>
-  <HeaderWeb/>
+  
 
   {/* Hero Section */}
     <main className="min-h-screen">

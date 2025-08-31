@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 
 export default function AdminContact() {
-  const [contacts, setContacts] = useState([]);
+  const [contact, setContact] = useState([]);
 
   useEffect(() => {
-    api.get("/admin/contacts")
-      .then(res => setContacts(res.data))
+    api.get("/admin/contact")
+      .then(res => setContact(res.data))
       .catch(err => console.error(err));
   }, []);
 
@@ -14,7 +14,7 @@ export default function AdminContact() {
     <div>
       <h1>Gestión de Contactos</h1>
       <ul>
-        {contacts.map(p => (
+        {contact.map(p => (
           <li key={p.id}>{p.name}</li>
         ))}
       </ul>
