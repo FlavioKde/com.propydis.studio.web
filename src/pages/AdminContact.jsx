@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 
-export default function AdminContacts() {
+export default function AdminContact() {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {

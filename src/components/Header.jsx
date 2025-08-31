@@ -18,9 +18,9 @@ export default function Header() {
       <nav>
         <ul className="flex gap-4">
           <li><NavLink to="/" className="hover:text-gray-300">Home</NavLink></li>
-          <li><NavLink to="/properties" className="hover:text-gray-300">Properties</NavLink></li>
-          <li><NavLink to="/projects" className="hover:text-gray-300">Projects</NavLink></li>
-          <li><NavLink to="/contact" className="hover:text-gray-300">Contact</NavLink></li>
+          <li><NavLink to="/property" className="hover:text-gray-300">Propiedades</NavLink></li>
+          <li><NavLink to="/project" className="hover:text-gray-300">Projectos</NavLink></li>
+          <li><NavLink to="/contact" className="hover:text-gray-300">Contacto</NavLink></li>
 
           {user?.role === "ADMIN" && (
             <>
