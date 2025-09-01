@@ -1,33 +1,41 @@
-import { Link } from "react-router-dom";
-
-
+// src/pages/Property.jsx
+import { useEffect, useState } from "react";
+import { getProperties } from "../api/property";
+import PageWithHero from "../components/PageWithHero";
+import Card from "../components/Card";
 
 export default function Property() {
-  return(
-  <>
-  
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  {/* Hero Section */}
-    <main className="min-h-screen">
+  useEffect(() => {
+    getProperties()
+      .then((res) => setProperties(res.data))
+      .catch((err) => setError("No se pudieron cargar las propiedades"))
+      .finally(() => setLoading(false));
+  }, []);
 
-  <section className="bg-gradient-to-b from-blue-50 to-white py-20 text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">
-            Listado de propiedades
-          </h1>
-          <p className="text-lg text-gray-600 mb-6">
-            Nuestras propiedades más destacadas.
-          </p>
-          <Link
-            to="/properties"
-            className="bg-blue-900 text-white px-6 py-3 rounded hover:bg-blue-800 transition"
-          >
-            Ver Propiedades
-          </Link>
-        </div>
-      </section>
-  </main>
-  
-  </> 
+  if (loading) return <div className="container mx-auto py-12">Cargando...</div>;
+  if (error) return <div className="container mx-auto py-12">{error}</div>;
+
+  return (
+    <PageWithHero
+      title="Listado de Propiedades"
+      subtitle="Nuestras propiedades más destacadas."
+    >
+      <div className="grid md:grid-cols-3 gap-8">
+        {properties.map((p) => (
+          <Card
+            key={p.id}
+            image={p.image || p.cover || p.images?.[0]}
+            title={p.title}
+            description={p.shortDescription || p.description}
+            link={`/property/${p.id}`}
+            buttonLabel="Ver propiedad"
+          />
+        ))}
+      </div>
+    </PageWithHero>
   );
 }

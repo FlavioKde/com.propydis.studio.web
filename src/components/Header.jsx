@@ -25,9 +25,9 @@ export default function Header() {
           {user?.role === "ADMIN" && (
             <>
               <li><NavLink to="/admin" className="hover:text-gray-300">Admin</NavLink></li>
-              <li><NavLink to="/admin/properties" className="hover:text-gray-300">Admin Properties</NavLink></li>
-              <li><NavLink to="/admin/projects" className="hover:text-gray-300">Admin Projects</NavLink></li>
-              <li><NavLink to="/admin/contacts" className="hover:text-gray-300">Admin Contacts</NavLink></li>
+              <li><NavLink to="/admin/property" className="hover:text-gray-300">Administrar Propiedades</NavLink></li>
+              <li><NavLink to="/admin/project" className="hover:text-gray-300">Administrar Projectos</NavLink></li>
+              <li><NavLink to="/admin/contact" className="hover:text-gray-300">Administrar Contactos</NavLink></li>
             </>
           )}
 

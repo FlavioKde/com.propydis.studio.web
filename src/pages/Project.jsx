@@ -1,31 +1,41 @@
-import { Link } from "react-router-dom";
-
-
+// src/pages/Project.jsx
+import { useEffect, useState } from "react";
+import { getProjects } from "../api/project";
+import PageWithHero from "../components/PageWithHero";
+import Card from "../components/Card";
 
 export default function Project() {
-  return( 
-  <>
-  
-    {/* Hero Section */}
-    <main className="min-h-screen">
+  const [project, setProject] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  <section className="bg-gradient-to-b from-blue-50 to-white py-20 text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">
-            Listado de proyectos
-          </h1>
-          <p className="text-lg text-gray-600 mb-6">
-            Nuestras proyectos más destacadas.
-          </p>
-          <Link
-            to="/properties"
-            className="bg-blue-900 text-white px-6 py-3 rounded hover:bg-blue-800 transition"
-          >
-            Ver Proyectos
-          </Link>
-        </div>
-      </section>
-  </main>
-  </>
+  useEffect(() => {
+    getProjects()
+      .then((res) => setProject(res.data))
+      .catch(() => setError("No se pudieron cargar los proyectos"))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div className="container mx-auto py-12">Cargando...</div>;
+  if (error) return <div className="container mx-auto py-12">{error}</div>;
+
+  return (
+    <PageWithHero
+      title="Nuestros Proyectos"
+      subtitle="Descubre en qué estamos trabajando actualmente."
+    >
+      <div className="grid md:grid-cols-3 gap-8">
+        {project.map((p) => (
+          <Card
+            key={p.id}
+            image={p.image || p.cover || p.images?.[0]}
+            title={p.title}
+            description={p.shortDescription || p.description}
+            link={`/project/${p.id}`}
+            buttonLabel="Ver proyecto completo"
+          />
+        ))}
+      </div>
+    </PageWithHero>
   );
 }
