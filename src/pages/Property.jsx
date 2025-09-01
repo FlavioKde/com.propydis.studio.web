@@ -1,4 +1,3 @@
-// src/pages/Property.jsx
 import { useEffect, useState } from "react";
 import { getProperties } from "../api/property";
 import PageWithHero from "../components/PageWithHero";
@@ -11,8 +10,8 @@ export default function Property() {
 
   useEffect(() => {
     getProperties()
-      .then((res) => setProperties(res.data))
-      .catch((err) => setError("No se pudieron cargar las propiedades"))
+      .then((data) => setProperties(data)) // ahora data ya viene mapeada
+      .catch(() => setError("No se pudieron cargar las propiedades"))
       .finally(() => setLoading(false));
   }, []);
 
@@ -28,9 +27,9 @@ export default function Property() {
         {properties.map((p) => (
           <Card
             key={p.id}
-            image={p.image || p.cover || p.images?.[0]}
+            image={p.images[0]} // ya viene del mapProperty
             title={p.title}
-            description={p.shortDescription || p.description}
+            description={p.description}
             link={`/property/${p.id}`}
             buttonLabel="Ver propiedad"
           />
