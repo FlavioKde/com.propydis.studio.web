@@ -19,13 +19,13 @@
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    color: var(--color-base-white);
+    color: var(--color-base-black);
   }
   
   body {
     font-family: var(--font-sans);
     color: var(--color-base-mid);
-    background-color: var(--color-base-black);
+    background-color: var(--color-base-white);
   }
 }
 
