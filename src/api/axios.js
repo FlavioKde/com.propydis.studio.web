@@ -10,7 +10,12 @@ api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
   const isAuthEndpoint =
     config.url.includes('/auth/login') ||
-    config.url.includes('/auth/register');
+    config.url.includes('/auth/register') ||
+    config.url.includes('/project/getAll') ||
+    config.url.includes('/project/get/') ||   // 👈 detalle de proyecto
+    config.url.includes('/property/getAll') ||
+    config.url.includes('/property/get/'); 
+
   if (token && !isAuthEndpoint) {
     config.headers.Authorization = `Bearer ${token}`;
   }

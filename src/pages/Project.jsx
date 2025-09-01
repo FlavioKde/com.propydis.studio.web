@@ -1,17 +1,16 @@
-// src/pages/Project.jsx
 import { useEffect, useState } from "react";
 import { getProjects } from "../api/project";
 import PageWithHero from "../components/PageWithHero";
 import Card from "../components/Card";
 
 export default function Project() {
-  const [project, setProject] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     getProjects()
-      .then((res) => setProject(res.data))
+      .then((data) => setProjects(data))
       .catch(() => setError("No se pudieron cargar los proyectos"))
       .finally(() => setLoading(false));
   }, []);
@@ -25,12 +24,12 @@ export default function Project() {
       subtitle="Descubre en qué estamos trabajando actualmente."
     >
       <div className="grid md:grid-cols-3 gap-8">
-        {project.map((p) => (
+        {projects.map((p) => (
           <Card
             key={p.id}
-            image={p.image || p.cover || p.images?.[0]}
+            image={p.images[0]}
             title={p.title}
-            description={p.shortDescription || p.description}
+            description={p.description}
             link={`/project/${p.id}`}
             buttonLabel="Ver proyecto completo"
           />
