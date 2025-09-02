@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../api/axios";
+import api from "../../api/axios";
 
 export default function AdminProject() {
   const [project, setProject] = useState([]);
@@ -14,7 +14,7 @@ export default function AdminProject() {
     <div>
       <h1>Gestión de Projectos</h1>
       <ul>
-        {projects.map(p => (
+        {project.map(p => (
           <li key={p.id}>{p.name}</li>
         ))}
       </ul>

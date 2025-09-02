@@ -4,17 +4,17 @@ import { AuthProvider } from "./context/AuthContext";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Property from "./pages/Property";
+import PropertyDetail from "./pages/PropertyDetail";
 import Project from "./pages/Project";
+import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
-import Admin from "./pages/Admin";
-import AdminProperty from "./pages/AdminProperty";
-import AdminProject from "./pages/AdminProject";
-import AdminContact from "./pages/AdminContact";
+import Dashboard from  "./pages/admin/Dashboard";
+import AdminProperty from "./pages/admin/AdminProperty";
+import AdminProject from "./pages/admin/AdminProject";
+import AdminContact from "./pages/admin/AdminContact";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminRoute from "./components/AdminRoute";
-import ProjectDetail from "./pages/ProjectDetail";
-import PropertyDetail from "./pages/PropertyDetail";
 
 export default function App() {
   return (
@@ -35,7 +35,7 @@ export default function App() {
             path="/admin"
             element={
               <AdminRoute>
-                <Layout><Admin /></Layout>
+                <Layout><Dashboard /></Layout>
               </AdminRoute>
             }
           />

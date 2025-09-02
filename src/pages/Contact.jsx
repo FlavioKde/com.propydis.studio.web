@@ -23,45 +23,82 @@ export default function Contact() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus({ success: null, message: "" });
+  e.preventDefault(); // ← esto va primero
 
-    try {
-      const response = await api.post('/contact', {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        message: formData.message,
-        createdAt: new Date().toISOString(),
-        status: "PENDING" // Valor por defecto según tu ENUM
+  const cleanedPhone = formData.phone.replace(/\D/g, "");
+
+  // Validaciones previas
+  if (!formData.firstName.trim()) {
+    setSubmitStatus({ success: false, message: "El nombre es obligatorio" });
+    return;
+  }
+
+  if (!formData.lastName.trim()) {
+    setSubmitStatus({ success: false, message: "El apellido es obligatorio" });
+    return;
+  }
+
+  const emailRegex = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(formData.email)) {
+    setSubmitStatus({ success: false, message: "El correo electrónico no es válido" });
+    return;
+  }
+
+  if (cleanedPhone && !/^[0-9]{10,11}$/.test(cleanedPhone)) {
+    setSubmitStatus({ success: false, message: "El teléfono debe tener entre 10 y 11 dígitos numéricos" });
+    return;
+  }
+
+  if (!formData.message.trim()) {
+    setSubmitStatus({ success: false, message: "El mensaje es obligatorio" });
+    return;
+  }
+
+  setIsSubmitting(true);
+  setSubmitStatus({ success: null, message: "" });
+
+  try {
+    const response = await api.post('/contact/save', {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: cleanedPhone,
+      message: formData.message,
+      createdAt: new Date().toISOString(),
+      status: "PENDING"
+    });
+
+    if (response.status === 200) {
+      setSubmitStatus({
+        success: true,
+        message: "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto."
       });
 
-      setSubmitStatus({ 
-        success: true, 
-        message: "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto." 
+      // Reset solo si fue exitoso
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: ""
       });
-      
-      // Reset form
-      setFormData({ 
-        firstName: "", 
-        lastName: "", 
-        email: "", 
-        phone: "", 
-        message: "" 
-      });
-
-    } catch (error) {
-      console.error("Error enviando formulario:", error);
-      setSubmitStatus({ 
-        success: false, 
-        message: "Error al enviar el mensaje. Por favor, intenta nuevamente." 
-      });
-    } finally {
-      setIsSubmitting(false);
     }
-  };
+
+  } catch (error) {
+    console.error("Error enviando formulario:", error);
+
+    const backendMessage = error.response?.data?.message || "Error al enviar el mensaje. Por favor, intenta nuevamente.";
+
+    setSubmitStatus({
+      success: false,
+      message: backendMessage
+    });
+
+    // No se borra el formulario aquí
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return ( 
     <>

@@ -11,7 +11,6 @@ api.interceptors.request.use(config => {
   const isAuthEndpoint =
     config.url.includes('/auth/login') ||
     config.url.includes('/auth/register') ||
-    config.url.includes('/contact') ||
     config.url.includes('/contact/save') ||
     config.url.includes('/project/getAll') ||
     config.url.includes('/project/get/') ||   
