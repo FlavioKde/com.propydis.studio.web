@@ -5,7 +5,7 @@ export default function AdminContact() {
   const [contact, setContact] = useState([]);
 
   useEffect(() => {
-    api.get("/admin/contact")
+    api.get("/admin/contact/getAll")
       .then(res => setContact(res.data))
       .catch(err => console.error(err));
   }, []);

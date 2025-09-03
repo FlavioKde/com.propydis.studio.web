@@ -1,9 +1,11 @@
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import AdminPropertyDropdown from "./AdminPropertyDropdown";
+import AdminProjectDropdown from "./AdminProjectDropdown";
+import AdminContactDropdown from "./AdminContactDropdown";
 
 export default function HeaderWeb() {
-
-const { user, logout } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -11,8 +13,9 @@ const { user, logout } = useAuth();
     navigate("/");
   };
 
+  const isAdmin = user?.roles?.includes("ROLE_ADMIN");
+
   return (
-    <>
     <header
       className="relative bg-cover bg-center h-24 mb-24"
       style={{ backgroundImage: "url('/boceto_portada.jpg')" }}
@@ -24,100 +27,67 @@ const { user, logout } = useAuth();
           <img src="/logoPropydis.jpg" alt="Logo" className="h-10" />
         </Link>
 
-        {/* Nav - MENÚ PRINCIPAL CON NavLink */}
-        <nav className="flex gap-6 text-base-dark font-medium">
-          {/* Items del menú con NavLink */}
-          <NavLink 
-            to="/" 
-            className={({ isActive }) => 
-              isActive 
-                ? "text-accent1-blue font-bold border-b-2 border-accent1-blue" 
-                : "hover:text-accent1-blue transition"
-            }
-          >
-            Inicio
-          </NavLink>
-          
-          <NavLink 
-            to="/project"
-            className={({ isActive }) => 
-              isActive 
-                ? "text-accent1-blue font-bold border-b-2 border-accent1-blue" 
-                : "hover:text-accent1-blue transition"
-            }
-          >
-            Proyectos
-          </NavLink>
-          
-          <NavLink 
-            to="/property"
-            className={({ isActive }) => 
-              isActive 
-                ? "text-accent1-blue font-bold border-b-2 border-accent1-blue" 
-                : "hover:text-accent1-blue transition"
-            }
-          >
-            Propiedades
-          </NavLink>
-          
-          <NavLink 
-            to="/contact"
-            className={({ isActive }) => 
-              isActive 
-                ? "text-accent1-blue font-bold border-b-2 border-accent1-blue" 
-                : "hover:text-accent1-blue transition"
-            }
-          >
-            Contacto
-          </NavLink>
-
-          {/* Menú Admin también con NavLink */}
-          {user?.role === "ADMIN" && (
+        {/* Nav principal */}
+        <nav className="relative flex gap-6 text-base-dark font-medium z-50 items-center">
+          {/* Enlaces públicos solo si no es admin */}
+          {!isAdmin && (
             <>
-              <NavLink 
-                to="/admin"
-                className={({ isActive }) => 
-                  isActive 
-                    ? "text-gray-700 font-bold border-b-2 border-gray-700" 
-                    : "hover:text-gray-500 transition"
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-accent1-blue font-bold border-b-2 border-accent1-blue"
+                    : "hover:text-accent1-blue transition"
                 }
               >
-                Admin
+                Inicio
               </NavLink>
-              <NavLink 
-                to="/admin/property"
-                className={({ isActive }) => 
-                  isActive 
-                    ? "text-gray-700 font-bold border-b-2 border-gray-700" 
-                    : "hover:text-gray-500 transition"
-                }
-              >
-                Propiedades
-              </NavLink>
-              <NavLink 
-                to="/admin/project"
-                className={({ isActive }) => 
-                  isActive 
-                    ? "text-gray-700 font-bold border-b-2 border-gray-700" 
-                    : "hover:text-gray-500 transition"
+
+              <NavLink
+                to="/project"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-accent1-blue font-bold border-b-2 border-accent1-blue"
+                    : "hover:text-accent1-blue transition"
                 }
               >
                 Proyectos
               </NavLink>
-              <NavLink 
-                to="/admin/contact"
-                className={({ isActive }) => 
-                  isActive 
-                    ? "text-gray-700 font-bold border-b-2 border-gray-700" 
-                    : "hover:text-gray-500 transition"
+
+              <NavLink
+                to="/property"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-accent1-blue font-bold border-b-2 border-accent1-blue"
+                    : "hover:text-accent1-blue transition"
                 }
               >
-                Contactos
+                Propiedades
+              </NavLink>
+
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-accent1-blue font-bold border-b-2 border-accent1-blue"
+                    : "hover:text-accent1-blue transition"
+                }
+              >
+                Contacto
               </NavLink>
             </>
           )}
 
-          {/* Login/Logout con Link (no necesita estado activo) */}
+          {/* Menús Admin con dropdowns */}
+          {isAdmin && (
+            <div className="flex gap-4">
+              <AdminPropertyDropdown />
+              <AdminProjectDropdown />
+              <AdminContactDropdown />
+            </div>
+          )}
+
+          {/* Login/Logout */}
           {user ? (
             <button
               onClick={handleLogout}
@@ -131,12 +101,7 @@ const { user, logout } = useAuth();
             </Link>
           )}
         </nav>
-        
-
-
       </div>
     </header>
-      
-      </>
   );
 }

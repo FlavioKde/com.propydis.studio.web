@@ -5,7 +5,7 @@ export default function AdminProject() {
   const [project, setProject] = useState([]);
 
   useEffect(() => {
-    api.get("/admin/project")
+    api.get("/admin/project/getAll")
       .then(res => setProject(res.data))
       .catch(err => console.error(err));
   }, []);
