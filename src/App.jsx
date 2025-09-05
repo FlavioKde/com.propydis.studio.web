@@ -116,7 +116,7 @@ export default function App() {
                 <Layout><AdminContact /></Layout>
               </AdminRoute>
             }
-          />
+           /> 
         </Routes>
       </Router>
     </AuthProvider>
