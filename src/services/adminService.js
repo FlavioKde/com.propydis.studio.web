@@ -13,6 +13,16 @@ export async function replyToContact(id, message) {
   return response.data;
 }
 
+export async function markContactAsRead(id) {
+  const res = await api.put(`/admin/contact/mark-as-read/${id}`);
+  return res.data;
+}
+
+export async function deleteContact(id) {
+  const res = await api.delete(`/admin/contact/delete/${id}`);
+  return res.data;
+}
+
 //projects
 
 export async function getAllProjects() {
@@ -26,7 +36,7 @@ export async function saveProject(project) {
 }
 
 export async function getProjectById(id) {
-  const res = await api.get(`/admin/project/${id}`);
+  const res = await api.get(`/admin/project/get/${id}`);
   return res.data;
 } 
 
@@ -37,6 +47,15 @@ export async function deleteProject(id) {
 
 export async function updateProject(id, project) {
   const res = await api.put(`/admin/project/${id}`, project);
+  return res.data;
+}
+
+export async function updateProjectForm(formData) {
+  const res = await api.put("/admin/project/update", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return res.data;
 }
 
