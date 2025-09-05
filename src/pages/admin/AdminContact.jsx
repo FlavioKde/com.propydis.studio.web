@@ -5,6 +5,8 @@ import {
   markContactAsRead,
   deleteContact,
 } from "../../services/adminService";
+import { markContactAsViewed } from "../../services/adminService";
+
 
 export default function AdminContact() {
   const [contacts, setContacts] = useState([]);
@@ -47,6 +49,8 @@ export default function AdminContact() {
     }
   }
 
+
+
   return (
     <div className="max-w-6xl mx-auto mt-10 px-4">
       <div className="flex justify-between items-center mb-6">
@@ -74,20 +78,26 @@ export default function AdminContact() {
           <tbody>
             {contacts.map((c) => (
               <tr key={c.id} className="border-t">
-                <td className="px-4 py-2">{c.nombre}</td>
-                <td className="px-4 py-2">{c.apellido}</td>
+                <td className="px-4 py-2">{c.firstName}</td>
+                <td className="px-4 py-2">{c.lastName}</td>
                 <td className="px-4 py-2">{c.email}</td>
-                <td className="px-4 py-2">{c.telefono}</td>
+                <td className="px-4 py-2">{c.phone}</td>
                 <td className="px-4 py-2">
                   {c.mensaje?.length > 50
-                    ? c.mensaje.slice(0, 50) + "..."
-                    : c.mensaje || "Sin mensaje"}
+                    ? c.message.slice(0, 50) + "..."
+                    : c.message || "Sin mensaje"}
                 </td>
                 <td className="px-4 py-2">
-                  {new Date(c.fecha).toLocaleDateString("es-ES")}
+                    {c.createdAt
+                ? new Date(c.createdAt).toLocaleDateString("es-ES", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+              })
+                    : "Sin fecha"}
                 </td>
                 <td className="px-4 py-2">
-                  {c.contactStatus === "NEW" && "🟡 Nuevo"}
+                  {c.contactstatus === "NEW" && "🟡 Nuevo"}
                   {c.contactStatus === "VIEWED" && "🔵 Visto"}
                   {c.contactStatus === "REPLIED" && "🟢 Respondido"}
                 </td>

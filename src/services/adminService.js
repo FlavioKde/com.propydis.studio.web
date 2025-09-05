@@ -23,6 +23,11 @@ export async function deleteContact(id) {
   return res.data;
 }
 
+export async function markContactAsViewed(id) {
+  const res = await api.put(`/admin/contact/mark-as-viewed/${id}`);
+  return res.data;
+}
+
 //projects
 
 export async function getAllProjects() {
