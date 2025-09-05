@@ -10,7 +10,7 @@ export default function Property() {
 
   useEffect(() => {
     getProperties()
-      .then((data) => setProperties(data)) // ahora data ya viene mapeada
+      .then((data) => setProperties(data)) 
       .catch(() => setError("No se pudieron cargar las propiedades"))
       .finally(() => setLoading(false));
   }, []);
@@ -31,6 +31,17 @@ export default function Property() {
             title={p.title}
             description={p.description}
             link={`/property/${p.id}`}
+            extra={
+            <p className="text-green-700 font-semibold">
+            {p.priceText
+            ? p.priceText
+            : p.priceValue?.toLocaleString("es-ES", {
+            style: "currency",
+            currency: "EUR",
+            })}
+            </p>
+      }
+
             buttonLabel="Ver propiedad"
           />
         ))}

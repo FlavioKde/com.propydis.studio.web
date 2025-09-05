@@ -19,10 +19,23 @@ export default function PropertyDetail() {
   if (error) return <div className="container mx-auto py-12">{error}</div>;
   if (!property) return <div className="container mx-auto py-12">Propiedad no encontrada</div>;
 
+  const { title, description, images, priceText, priceValue } = property;
+
   return (
     <div className="container mx-auto py-12">
       <h1 className="text-3xl font-bold mb-4">{property.title}</h1>
       <p className="mb-6">{property.description}</p>
+      <p className="text-green-700 text-lg font-semibold mb-4">
+      {priceText
+      ? priceText
+      : priceValue?.toLocaleString("es-ES", {
+        style: "currency",
+        currency: "EUR",
+      })}
+        </p>
+        {!priceText && !priceValue && (
+          <p className="text-gray-500 italic">Precio no disponible</p>
+        )}
 
       {property.images.length > 0 && (
         <div className="grid md:grid-cols-3 gap-4">
