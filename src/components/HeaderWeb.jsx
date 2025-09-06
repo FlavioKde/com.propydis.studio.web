@@ -66,6 +66,17 @@ export default function HeaderWeb() {
               </NavLink>
 
               <NavLink
+                to="/service"
+                className={({ isActive }) =>
+                  isActive  
+                    ? "text-accent1-blue font-bold border-b-2 border-accent1-blue"
+                    : "hover:text-accent1-blue transition"
+                }
+              >
+                Servicios
+              </NavLink>
+
+              <NavLink
                 to="/contact"
                 className={({ isActive }) =>
                   isActive

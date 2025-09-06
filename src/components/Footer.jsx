@@ -37,7 +37,7 @@ export default function Footer() {
       {/* Info de contacto */}
       <div className="text-sm text-black text-center md:text-right">
         <p>© {new Date().getFullYear()} PropyDis Studio</p>
-        <p>Email: contacto@propydis.com</p>
+        <p>Email: infoPropydis@gmail.com</p>
       </div>
 
     </footer>

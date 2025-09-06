@@ -22,6 +22,7 @@ import AdminContact from "./pages/admin/AdminContact";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./pages/ErrorPage";
+import Service from "./pages/Service";
 
 export default function App() {
   return (
@@ -36,6 +37,8 @@ export default function App() {
           <Route path="/project/:id" element={<Layout><ProjectDetail /></Layout>} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
           <Route path="/login" element={<Layout><Login /></Layout>} />
+          <Route path="/service" element={<Layout><Service /></Layout>} />
+          
 
           {/* Admin */}
           <Route
