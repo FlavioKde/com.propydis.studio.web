@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAllProperties, getAllProjects, getAllContacts } from "../../services/adminService";
+import { safeApiCall } from "../../utils/safeApiCall";
 
 
 
@@ -8,18 +10,20 @@ export default function Dashboard() {
   const [propertyCount, setPropertyCount] = useState(0);
   const [projectCount, setProjectCount] = useState(0);
   const [recentContacts, setRecentContacts] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    async function fetchData() {
-      const token = localStorage.getItem("token");
-      console.log("Token actual:", token); // 👈 esto te muestra si existe
+  async function fetchData() {
+    const token = localStorage.getItem("token");
+    if (!token) return;
 
-
-      if (!token) return;  
-
-      const properties = await getAllProperties();
-      const projects = await getAllProjects();
-      const contacts = await getAllContacts();
+    try {
+      const [properties, projects, contacts] = await Promise.all([
+        safeApiCall(() => getAllProperties(), navigate),
+        safeApiCall(() => getAllProjects(), navigate),
+        safeApiCall(() => getAllContacts(), navigate),
+      ]);
 
       setPropertyCount(properties.length);
       setProjectCount(projects.length);
@@ -29,9 +33,16 @@ export default function Dashboard() {
         .slice(0, 5);
 
       setRecentContacts(sortedContacts);
+    } catch (err) {
+      console.error("Error en el dashboard:", err);
     }
-    fetchData();
-  }, []);
+  }
+
+  fetchData();
+}, [navigate]);
+
+
+
 
   return (
     <div className="p-8">

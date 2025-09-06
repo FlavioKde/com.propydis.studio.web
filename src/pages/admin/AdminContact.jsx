@@ -6,13 +6,15 @@ import {
   deleteContact,
 } from "../../services/adminService";
 import { markContactAsViewed } from "../../services/adminService";
+import { safeApiCall } from "../../utils/safeApiCall";
+
 
 
 export default function AdminContact() {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+/*
   useEffect(() => {
     async function fetchContacts() {
       try {
@@ -26,6 +28,15 @@ export default function AdminContact() {
     }
     fetchContacts();
   }, []);
+
+*/
+useEffect(() => {
+  safeApiCall(() => getAllContacts(), navigate)
+    .then(setContacts)
+    .finally(() => setLoading(false));
+}, [navigate]);
+
+
 
   async function handleMarkAsRead(id) {
     try {

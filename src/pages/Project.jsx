@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import { getProjects } from "../api/project";
 import PageWithHero from "../components/PageWithHero";
 import Card from "../components/Card";
+import { safeApiCall } from "../utils/safeApiCall";
 
 export default function Project() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    getProjects()
-      .then((data) => setProjects(data))
-      .catch(() => setError("No se pudieron cargar los proyectos"))
-      .finally(() => setLoading(false));
-  }, []);
+  safeApiCall(() => getProjects(), navigate)
+    .then(setProjects)
+    .finally(() => setLoading(false));
+
+}, [navigate]);
 
   if (loading) return <div className="container mx-auto py-12">Cargando...</div>;
-  if (error) return <div className="container mx-auto py-12">{error}</div>;
-
+ 
   return (
     <PageWithHero
       title="Nuestros Proyectos"
@@ -27,7 +29,7 @@ export default function Project() {
         {projects.map((p) => (
           <Card
             key={p.id}
-            image={p.images[0]}
+            image={p.images?.[0] || "/default.jpg"}
             title={p.title}
             description={p.description}
             link={`/project/${p.id}`}

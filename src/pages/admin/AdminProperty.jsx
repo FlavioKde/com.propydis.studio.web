@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllProperties, deleteProperty } from "../../services/adminService";
+import { safeApiCall } from "../../utils/safeApiCall";
 
 
 export default function AdminPropertyList() {
@@ -9,31 +10,22 @@ export default function AdminPropertyList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchProperties() {
-      try {
-        const data = await getAllProperties();
-        setProperties(data);
-      } catch (err) {
-        console.error("Error al cargar propiedades:", err);
-      }finally {
-        setLoading(false);
-      }
-    }
-    fetchProperties();
-  }, []);
+      safeApiCall(() => getAllProperties(), navigate)
+        .then(setProperties)
+        .finally(() => setLoading(false));  
+    }, [navigate]);
 
+  
   const handleDelete = async (id) => {
-    const confirm = window.confirm("¿Estás seguro de que querés eliminar esta propiedad?"); 
-    if (confirm) {
-      try {
-        await deleteProperty(id); 
+    const confirm = window.confirm("¿Estás seguro de que querés eliminar esta propiedad?");
+  if (confirm) {
+    safeApiCall(() => deleteProperty(id), navigate)
+      .then(() => {
         setProperties(properties.filter((p) => p.id !== id));
-      } catch (err) {
-        console.error("Error al eliminar propiedad:", err);
-      }
-    }
-  };
-
+      });
+  }
+};
+  
 
   return (
 
@@ -72,7 +64,7 @@ export default function AdminPropertyList() {
       <td className="px-4 py-2 text-green-700 font-semibold">
         {property.priceText || property.priceValue?.toLocaleString("es-ES", {
           style: "currency",
-          currency: "EUR",
+          currency: "USD",
         })}
       </td>
       <td className="px-4 py-2 space-x-2">

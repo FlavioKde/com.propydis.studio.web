@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { saveProject } from "../../services/adminService";
+import { safeApiCall } from "../../utils/safeApiCall";
 
 
 export default function AdminProjectCreate() {
@@ -17,23 +18,22 @@ export default function AdminProjectCreate() {
   setImages(validFiles);
 };
 
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  setLoading(true);
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
-    images.forEach((img) => {
-      formData.append("photos", img); // el backend debe mapear esto a PhotoDTO
-    });
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("description", description);
+  images.forEach((img) => {
+    formData.append("photos", img);
+  });
 
-    try {
-      await saveProject(formData);
-      navigate("/admin/project");
-    } catch (err) {
-      console.error("Error al crear proyecto:", err);
-    }
-  };
+  safeApiCall(() => saveProject(formData), navigate)
+    .then(() => navigate("/admin/project"))
+    .finally(() => setLoading(false));
+};
 
   return (
     <div className="max-w-2xl mx-auto mt-10">

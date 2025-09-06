@@ -1,26 +1,29 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import { getProjectById, updateProjectForm } from "../../services/adminService";
+import { safeApiCall } from "../../utils/safeApiCall";
 
 export default function AdminProjectEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [existingPhotos, setExistingPhotos] = useState([]);
   const [photosToDelete, setPhotosToDelete] = useState([]);
   const [newPhotos, setNewPhotos] = useState([]);
-
+ 
   useEffect(() => {
-    async function fetchProject() {
-      const project = await getProjectById(id);
+  safeApiCall(() => getProjectById(id), navigate)
+    .then((project) => {
       setName(project.name);
       setDescription(project.description);
       setExistingPhotos(project.photosDTO || []);
-    }
-    fetchProject();
-  }, [id]);
+    })
+    .finally(() => setLoading(false));
+}, [id, navigate]);
+         
+
 
   const handleDeleteToggle = (photoId) => {
     setPhotosToDelete((prev) =>
@@ -35,14 +38,15 @@ export default function AdminProjectEdit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+    
     formData.append("id", id);
     formData.append("name", name);
     formData.append("description", description);
     photosToDelete.forEach((id) => formData.append("deletePhotoIds", id));
     newPhotos.forEach((file) => formData.append("photos", file));
 
-   await updateProjectForm(formData);
-    navigate("/admin/project");
+   safeApiCall(() => updateProjectForm(formData), navigate)
+  .then(() => navigate("/admin/project"));
   };
 
   return (

@@ -21,6 +21,7 @@ import AdminProjectDelete from "./pages/admin/AdminProjectDelete.jsx";
 import AdminContact from "./pages/admin/AdminContact";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminRoute from "./components/AdminRoute";
+import ErrorPage from "./pages/ErrorPage";
 
 export default function App() {
   return (
@@ -117,6 +118,13 @@ export default function App() {
               </AdminRoute>
             }
            /> 
+           {/* Error */}
+          <Route
+            path="/error"
+            element={
+              <Layout><ErrorPage /></Layout>
+            }
+          />
         </Routes>
       </Router>
     </AuthProvider>
