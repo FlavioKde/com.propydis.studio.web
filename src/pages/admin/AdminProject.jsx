@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllProjects, deleteProject } from "../../services/adminService";
 import { updateProjectForm } from "../../services/adminService";
+import { safeApiCall } from "../../utils/safeApiCall";
 
 export default function AdminProjectList() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  /*
   useEffect(() => {
     async function fetchProjects() {
       try {
@@ -21,18 +23,24 @@ export default function AdminProjectList() {
     }
     fetchProjects();
   }, []);
+  */
+  useEffect(() => {
+      safeApiCall(() => getAllProjects(), navigate)
+        .then(setProjects)
+        .finally(() => setLoading(false));
+    
+    }, [navigate]);
+
 
   const handleDelete = async (id) => {
-    const confirm = window.confirm("¿Estás seguro de que querés eliminar este proyecto?");
-    if (confirm) {
-      try {
-        await deleteProject(id);
+  const confirm = window.confirm("¿Estás seguro de que querés eliminar este proyecto?");
+  if (confirm) {
+    safeApiCall(() => deleteProject(id), navigate)
+      .then(() => {
         setProjects(projects.filter((p) => p.id !== id));
-      } catch (err) {
-        console.error("Error al eliminar proyecto:", err);
-      }
-    }
-  };
+      });
+  }
+};
 
   return (
     <div className="max-w-5xl mx-auto mt-10">

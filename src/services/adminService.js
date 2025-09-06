@@ -77,7 +77,7 @@ export async function saveProperty(property) {
 } 
 
 export async function getPropertyById(id) {
-  const res = await api.get(`/admin/property/${id}`);
+  const res = await api.get(`/admin/property/get/${id}`);
   return res.data;
 } 
 
@@ -91,3 +91,11 @@ export async function updateProperty(id, property) {
   return res.data;
 }
 
+export async function updatePropertyForm(formData) {
+  const res = await api.put("/admin/property/update", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+}
