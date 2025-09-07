@@ -56,14 +56,9 @@ export async function updateProject(id, project) {
 }
 
 export async function updateProjectForm(formData) {
-  const res = await api.put("/admin/project/update", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  const res = await api.put("/admin/project/update", formData);
   return res.data;
 }
-
 //properties
 
 export async function getAllProperties() {
@@ -92,10 +87,6 @@ export async function updateProperty(id, property) {
 }
 
 export async function updatePropertyForm(formData) {
-  const res = await api.put("/admin/property/update", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  const res = await api.put("/admin/property/update", formData);
   return res.data;
 }

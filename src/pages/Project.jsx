@@ -22,8 +22,7 @@ export default function Project() {
  
   return (
     <PageWithHero
-      title="Nuestros Proyectos"
-      subtitle="Descubre en qué estamos trabajando actualmente."
+      
     >
       <div className="grid md:grid-cols-3 gap-8">
         {projects.map((p) => (

@@ -30,7 +30,7 @@ export default function App() {
       <Router>
         <Routes>
           {/* Públicas */}
-          <Route path="/" element={<Layout><Home /></Layout>} />
+          <Route path="/" element={<Home />} />
           <Route path="/property" element={<Layout><Property /></Layout>} />
           <Route path="/property/:id" element={<Layout><PropertyDetail /></Layout>} />
           <Route path="/project" element={<Layout><Project /></Layout>} />
