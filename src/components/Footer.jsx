@@ -9,7 +9,7 @@ export default function Footer() {
         <p className="text-gray-600 mb-4">
           Explora nuestra selección de propiedades exclusivas.
         </p>
-        <Link to="/properties" className="text-blue-700 hover:underline">
+        <Link to="/property" className="text-blue-700 hover:underline">
           Ver más →
         </Link>
       </div>
@@ -19,7 +19,7 @@ export default function Footer() {
         <p className="text-gray-600 mb-4">
           Descubre nuestros proyectos en desarrollo.
         </p>
-        <Link to="/projects" className="text-blue-700 hover:underline">
+        <Link to="/project" className="text-blue-700 hover:underline">
           Ver más →
         </Link>
       </div>
@@ -37,7 +37,7 @@ export default function Footer() {
       {/* Info de contacto */}
       <div className="text-sm text-black text-center md:text-right">
         <p>© {new Date().getFullYear()} PropyDis Studio</p>
-        <p>Email: infoPropydis@gmail.com</p>
+        <p>Email: infopropydis@gmail.com</p>
       </div>
 
     </footer>

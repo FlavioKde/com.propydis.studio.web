@@ -15,9 +15,10 @@ export default function AdminProjectCreate() {
   const validFiles = [...e.target.files].filter(file =>
     file.type.startsWith("image/") && file.size <= 5 * 1024 * 1024
   );
-  setImages(validFiles);
+  setImages((prev) => [...prev, ...validFiles]);
 };
 
+  
 
   const handleSubmit = async (e) => {
   e.preventDefault();
@@ -25,7 +26,9 @@ export default function AdminProjectCreate() {
 
   const formData = new FormData();
   formData.append("name", name);
+  console.log(name);
   formData.append("description", description);
+  console.log(description);
   images.forEach((img) => {
     formData.append("photos", img);
   });
@@ -34,6 +37,7 @@ export default function AdminProjectCreate() {
     .then(() => navigate("/admin/project"))
     .finally(() => setLoading(false));
 };
+
 
   return (
     <div className="max-w-2xl mx-auto mt-10">

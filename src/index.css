@@ -42,6 +42,17 @@
       background-color: var(--color-accent1-green);
     }
   }
+
+@keyframes fadeScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}  
   
-  /* Similar para los otros componentes */
+
 }

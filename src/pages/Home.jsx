@@ -4,28 +4,44 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <>
-      
+      <img
+  src="/logo_sin_fondo.png"
+  alt="Logo de la empresa"
+  className="fixed top-6 right-6 w-24 h-auto z-50 animate-[fadeScale_0.8s_ease-out]"
+/>
 
-      {/* Hero Section */}
-      
-      <section className="bg-gradient-to-b from-blue-50 to-white py-20 text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">
-            Bienvenido a PropyDis Studio
-          </h1>
-          <p className="text-lg text-gray-600 mb-6">
-            Tu socio en proyectos inmobiliarios, desde la idea hasta la entrega.
-          </p>
-          <Link
-            to="/properties"
-            className="bg-blue-900 text-white px-6 py-3 rounded hover:bg-blue-800 transition"
-          >
-            Ver Propiedades
-          </Link>
-        </div>
-      </section>
-
-      
+      <div
+      className="min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/boceto_portada.jpg')" }}
+    >
+      <nav className="fixed left-0 top-0 h-full flex flex-col justify-center px-8 space-y-6 text-black text-lg font-medium z-50">
+        <a
+          href="/property"
+          className="hover:underline hover:tracking-wide hover:scale-105 transition duration-300 text-black"
+    >
+      Propiedades
+      </a>
+      <a
+          href="/project"
+          className="hover:underline hover:tracking-wide hover:scale-105 transition duration-300 text-black"
+    >
+      Proyectos
+      </a>
+      <a
+          href="/service"
+          className="hover:underline hover:tracking-wide hover:scale-105 transition duration-300 text-black"
+    >
+      Servicios
+      </a>
+    <a
+          href="/contact"
+          className="hover:underline hover:tracking-wide hover:scale-105 transition duration-300 text-black"
+    >
+      Contacto
+      </a>
+  
+     </nav>
+      </div>  
       
     </>
   );

@@ -9,21 +9,6 @@ export default function AdminProjectList() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  /*
-  useEffect(() => {
-    async function fetchProjects() {
-      try {
-        const data = await getAllProjects();
-        setProjects(data);
-      } catch (err) {
-        console.error("Error al cargar proyectos:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProjects();
-  }, []);
-  */
   useEffect(() => {
       safeApiCall(() => getAllProjects(), navigate)
         .then(setProjects)
