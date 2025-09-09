@@ -24,6 +24,8 @@ api.interceptors.request.use((config) => {
 
   const isPublic = publicEndpoints.some((path) => urlPath.startsWith(path));
 
+  console.log("Request path:", urlPath);
+
   if (token && !isPublic) {
     config.headers.Authorization = `Bearer ${token}`;
   }

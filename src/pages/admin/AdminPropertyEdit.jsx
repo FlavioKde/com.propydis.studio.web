@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams} from "react-router-dom";
 import { getPropertyById, updatePropertyForm } from "../../services/adminService";
 import { safeApiCall } from "../../utils/safeApiCall";
+import { toast } from "react-toastify";
 
 
 export default function AdminPropertyEdit() {
@@ -61,8 +62,15 @@ export default function AdminPropertyEdit() {
     newPhotos.forEach((file) => formData.append("photos", file));
 
 
-    await safeApiCall(() => updatePropertyForm(formData), navigate);
-    navigate("/admin/property");
+
+  safeApiCall(() => updatePropertyForm(id, formData), navigate)
+    .then(() => {
+      toast.success("Propiedad actualizada correctamente");
+      setTimeout(() => navigate("/admin/property"), 100);
+    })
+    .finally(() => setLoading(false));
+  
+
   };
 
   return (
