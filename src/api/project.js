@@ -5,7 +5,7 @@ const mapProject = (p) => ({
   id: p.id,
   title: p.name,
   description: p.description,
-  images: p.photosDTO?.map(photo => photo.url) || []
+  images: p.photos?.map(photo => photo.url) || []
 });
 
 // Listado

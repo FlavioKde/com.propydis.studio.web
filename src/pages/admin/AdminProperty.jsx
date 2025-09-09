@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllProperties, deleteProperty } from "../../services/adminService";
 import { safeApiCall } from "../../utils/safeApiCall";
+import { truncateText } from "../../utils/stringUtils";
+
+
 
 
 export default function AdminPropertyList() {
@@ -59,7 +62,11 @@ export default function AdminPropertyList() {
   {properties.map((property) => (
     <tr key={property.id} className="border-t">
       <td className="px-4 py-2">{property.name}</td>
-      <td className="px-4 py-2">{property.description.slice(0, 50)}...</td>
+      <td className="px-4 py-2 w-80">
+                  <div className="line-clamp-2 text-sm leading-tight h-10 overflow-hidden" title={property.description}>
+                    {truncateText(property.description, 80)}
+                  </div>
+                </td>
       <td className="px-4 py-2">{property.photos?.length || 0}</td>
       <td className="px-4 py-2 text-green-700 font-semibold">
         {property.priceText || property.priceValue?.toLocaleString("es-ES", {

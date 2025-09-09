@@ -1,31 +1,30 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAllProjects, deleteProject } from "../../services/adminService";
-import { updateProjectForm } from "../../services/adminService";
-import { safeApiCall } from "../../utils/safeApiCall";
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { getAllProjects, deleteProject } from "../../services/adminService"
+import { safeApiCall } from "../../utils/safeApiCall"
+import { truncateText } from "../../utils/stringUtils";
+
+
 
 export default function AdminProjectList() {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [projects, setProjects] = useState([])
+  const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
-      safeApiCall(() => getAllProjects(), navigate)
-        .then(setProjects)
-        .finally(() => setLoading(false));
-    
-    }, [navigate]);
-
+    safeApiCall(() => getAllProjects(), navigate)
+      .then(setProjects)
+      .finally(() => setLoading(false))
+  }, [navigate])
 
   const handleDelete = async (id) => {
-  const confirm = window.confirm("¿Estás seguro de que querés eliminar este proyecto?");
-  if (confirm) {
-    safeApiCall(() => deleteProject(id), navigate)
-      .then(() => {
-        setProjects(projects.filter((p) => p.id !== id));
-      });
+    const confirm = window.confirm("¿Estás seguro de que querés eliminar este proyecto?")
+    if (confirm) {
+      safeApiCall(() => deleteProject(id), navigate).then(() => {
+        setProjects(projects.filter((p) => p.id !== id))
+      })
+    }
   }
-};
 
   return (
     <div className="max-w-5xl mx-auto mt-10">
@@ -48,7 +47,7 @@ export default function AdminProjectList() {
           <thead className="bg-gray-100">
             <tr>
               <th className="px-4 py-2 text-left">Nombre</th>
-              <th className="px-4 py-2 text-left">Descripción</th>
+              <th className="px-4 py-2 text-left w-80">Descripción</th>
               <th className="px-4 py-2 text-left">Fotos</th>
               <th className="px-4 py-2 text-left">Acciones</th>
             </tr>
@@ -57,8 +56,12 @@ export default function AdminProjectList() {
             {projects.map((project) => (
               <tr key={project.id} className="border-t">
                 <td className="px-4 py-2">{project.name}</td>
-                <td className="px-4 py-2">{project.description.slice(0, 50)}...</td>
-                <td className="px-4 py-2">{project.photosDTO?.length || 0}</td>
+                <td className="px-4 py-2 w-80">
+                  <div className="line-clamp-2 text-sm leading-tight h-10 overflow-hidden" title={project.description}>
+                    {truncateText(project.description, 80)}
+                  </div>
+                </td>
+                <td className="px-4 py-2">{project.photos?.length || 0}</td>
                 <td className="px-4 py-2 space-x-2">
                   <button
                     onClick={() => navigate(`/admin/project/edit/${project.id}`)}
@@ -66,10 +69,7 @@ export default function AdminProjectList() {
                   >
                     ✏️ Editar
                   </button>
-                  <button
-                    onClick={() => handleDelete(project.id)}
-                    className="text-red-600 hover:underline"
-                  >
+                  <button onClick={() => handleDelete(project.id)} className="text-red-600 hover:underline">
                     🗑️ Eliminar
                   </button>
                 </td>
@@ -79,5 +79,5 @@ export default function AdminProjectList() {
         </table>
       )}
     </div>
-  );
+  )
 }
