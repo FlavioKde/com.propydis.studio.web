@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams} from "react-router-dom";
 import { getProjectById, updateProjectForm } from "../../services/adminService";
 import { safeApiCall } from "../../utils/safeApiCall";
+import { toast } from "react-toastify";
 
 export default function AdminProjectEdit() {
   const { id } = useParams();
@@ -34,20 +35,36 @@ export default function AdminProjectEdit() {
   const handleNewPhotosChange = (e) => {
     setNewPhotos([...e.target.files]);
   };
+  
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    
-    formData.append("id", id);
-    formData.append("name", name);
-    formData.append("description", description);
-    photosToDelete.forEach((id) => formData.append("deletePhotoIds", id));
-    newPhotos.forEach((file) => formData.append("photos", file));
+  const formData = new FormData();
 
-   safeApiCall(() => updateProjectForm(formData), navigate)
-  .then(() => navigate("/admin/project"));
-  };
+  formData.append("id", id); 
+  formData.append("name", name);
+  formData.append("description", description);
+
+  photosToDelete.forEach((photoId) => {
+    formData.append("deletePhotoIds", photoId);
+  });
+
+  newPhotos.forEach((file) => {
+    formData.append("photos", file);
+  });
+  for (let pair of formData.entries()) {
+  console.log(pair[0], pair[1]);
+}
+  
+    safeApiCall(() => updateProjectForm(id, formData), navigate)
+  .then(() => {
+    toast.success("Proyecto actualizado correctamente");
+    setTimeout(() => navigate("/admin/project"), 100);
+  })
+  .finally(() => setLoading(false));
+
+  
+};
 
   return (
     <div className="max-w-2xl mx-auto mt-10">

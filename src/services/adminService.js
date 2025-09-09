@@ -55,8 +55,8 @@ export async function updateProject(id, project) {
   return res.data;
 }
 
-export async function updateProjectForm(formData) {
-  const res = await api.put("/admin/project/update", formData);
+export async function updateProjectForm(id,formData) {
+  const res = await api.put(`/admin/project/${id}`, formData);
   return res.data;
 }
 //properties
@@ -86,7 +86,7 @@ export async function updateProperty(id, property) {
   return res.data;
 }
 
-export async function updatePropertyForm(formData) {
-  const res = await api.put("/admin/property/update", formData);
+export async function updatePropertyForm(id, formData) {
+  const res = await api.put(`/admin/property/${id}`, formData);
   return res.data;
 }

@@ -17,17 +17,22 @@ import AdminPropertyDelete from "./pages/admin/AdminPropertyDelete";
 import AdminProject from "./pages/admin/AdminProject";  
 import AdminProjectCreate from "./pages/admin/AdminProjectCreate";
 import AdminProjectEdit from "./pages/admin/AdminProjectEdit";
-import AdminProjectDelete from "./pages/admin/AdminProjectDelete.jsx";  
+import AdminProjectDelete from "./pages/admin/AdminProjectDelete"; 
 import AdminContact from "./pages/admin/AdminContact";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./pages/ErrorPage";
 import Service from "./pages/Service";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 export default function App() {
   return (
     <AuthProvider>
       <Router>
+        <ToastContainer/>
         <Routes>
           {/* Públicas */}
           <Route path="/" element={<Home />} />
@@ -104,7 +109,7 @@ export default function App() {
                 <Layout><AdminProjectEdit /></Layout>
               </AdminRoute>
             }
-          />    
+          />  
           <Route
             path="/admin/project/delete/:id"
             element={
@@ -128,6 +133,7 @@ export default function App() {
               <Layout><ErrorPage /></Layout>
             }
           />
+          
         </Routes>
       </Router>
     </AuthProvider>
