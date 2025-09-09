@@ -11,6 +11,7 @@ export default function AdminPropertyCreate() {
   const [priceText, setPriceText] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
   const handleImageChange = (e) => {
   const validFiles = [...e.target.files].filter(file =>
     file.type.startsWith("image/") && file.size <= 5 * 1024 * 1024
@@ -31,8 +32,18 @@ const handleSubmit = async (e) => {
   const formData = new FormData();
   formData.append("name", name);
   formData.append("description", description);
+  if (priceValue) {
+  formData.append("priceValue", Number(priceValue));
+}
+
+if (priceText.trim()) {
+  formData.append("priceText", priceText.trim());
+}
+
+  /*
   formData.append("priceValue", priceValue);
   formData.append("priceText", priceText);
+  */
   images.forEach((img) => formData.append("photos", img));
 
   safeApiCall(() => saveProperty(formData), navigate)

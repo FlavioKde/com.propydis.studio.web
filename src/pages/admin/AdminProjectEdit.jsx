@@ -19,7 +19,7 @@ export default function AdminProjectEdit() {
     .then((project) => {
       setName(project.name);
       setDescription(project.description);
-      setExistingPhotos(project.photosDTO || []);
+      setExistingPhotos(project.photos || []);
     })
     .finally(() => setLoading(false));
 }, [id, navigate]);

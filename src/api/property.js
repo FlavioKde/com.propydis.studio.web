@@ -1,7 +1,7 @@
 
 import api from "./axios";
 
-// Mapeo alineado al DTO de Property
+
 const mapProperty = (p) => ({
   id: p.id,
   title: p.name,
