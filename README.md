@@ -70,8 +70,8 @@ npm run dev
 
 ```
 
-
-
+The app will be available at http://localhost:5173 by default.
+💡 Make sure the backend is running and accessible, and that your .env file points to the correct API URL.
 
 🧠 Notes
 - The frontend is designed to be functional and modular, focusing on clean integration with the backend.
