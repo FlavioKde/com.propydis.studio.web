@@ -1,13 +1,13 @@
 # com.propydis.studio.web
 
-📘 **## web application for architecture**
+## 📘 **web application for architecture**
 
 ```text
 This frontend is part of the application propydis.studi.com, and is built with React and Vite. 
 It connects with the backend developed in Spring Boot through a REST API, and displays information about projects and properties of the studio.
 
 ```
-🚀 ## ** Tech Stack**
+## 🚀 **Tech Stack**
 
 - **React** – Main library to build the interface.
 - **Vite** – Fast and modern development environment.
@@ -15,7 +15,7 @@ It connects with the backend developed in Spring Boot through a REST API, and di
 - **React Router** – For navigation between views.
 - **CSS Modules** / Tailwind /.
 
-🔗 **##Connecting to the Backend**
+## 🔗 **Connecting to the Backend**
 
 ```text
 This frontend communicates with a Spring Boot backend via a REST API. Initially, the project used the native Fetch API, but it was later replaced with Axios for better error handling, cleaner syntax, and easier scalability.
@@ -31,7 +31,7 @@ axios.get('https://propydis-backend.onrender.com/api/projects');
 **warning**⚠️ Make sure the backend is configured to allow CORS requests from the frontend domain. If you're using cookies or tokens, ensure withCredentials: true is set in Axios and the backend allows credentials.
 
 
-📦 **## Local Setup**
+## 📦 **Local Setup**
 
 ```bash
 npm install
