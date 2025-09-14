@@ -3,10 +3,20 @@
 ## 📘 **web application for architecture**
 
 ```text
-This frontend is part of the application propydis.studi.com, and is built with React and Vite. 
-It connects with the backend developed in Spring Boot through a REST API, and displays information about projects and properties of the studio.
+This is the frontend module of the propydis.studio web application, developed with React and Vite.
+It consumes the RESTful API exposed by the Spring Boot backend and delivers a fast, responsive interface for users to browse architectural projects and available properties.
 
 ```
+
+## 🎯 **Purpose**
+
+The frontend is designed to:
+
+- Display public content such as properties for sale or rent.
+- Showcase architectural projects completed by the studio.
+- Provide an admin dashboard for authenticated users to manage content.
+It supports role-based access, adapting the interface based on whether the user is a visitor or an administrator.
+
 ## 🚀 **Tech Stack**
 
 - **React** – Main library to build the interface.
@@ -18,18 +28,18 @@ It connects with the backend developed in Spring Boot through a REST API, and di
 ## 🔗 **Connecting to the Backend**
 
 ```text
-This frontend communicates with a Spring Boot backend via a REST API. 
-Initially, the project used the native Fetch API, but it was later replaced with Axios for better error handling, cleaner syntax, and easier scalability.
+The frontend communicates with the backend via Axios.
+Initially, the native Fetch API was used, but Axios was adopted for its cleaner syntax, better error handling, and scalability.
 
 ```
 Example request:
 
 ```bash
-axios.get('https://propydis-backend.onrender.com/api/projects');
+axios.get(`${import.meta.env.VITE_API_URL}/api/projects`);
 
 ```
 
-**warning**⚠️ Make sure the backend is configured to allow CORS requests from the frontend domain. If you're using cookies or tokens, ensure withCredentials: true is set in Axios and the backend allows credentials.
+**warning**⚠️ Ensure CORS is properly configured in the backend to allow requests from the frontend domain. If using cookies or tokens, set withCredentials: true in Axios and configure the backend accordingly.
 
 
 ## 📦 **Local Setup**
@@ -57,27 +67,48 @@ To clone and run the frontend locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/propydis-frontend.git
+git clone https://github.com/FlavioKde/com.propydis.studio.web.git
 
 # Navigate into the project folder
-cd propydis-frontend
+cd com.propydis.studio.web
 
 # Install dependencies
 npm install
 
+# Configure backend API URL
+echo "VITE_API_URL=http://localhost:8080" > .env
+
 # Start the development server
 npm run dev
-
 ```
 
 The app will be available at http://localhost:5173 by default.
+
 💡 Make sure the backend is running and accessible, and that your .env file points to the correct API URL.
 
-🧠 Notes
+## 🧠 Technical Decisions
+- Axios over Fetch: Chosen for better error handling and cleaner integration with interceptors.
+- Vite over CRA: Faster builds and better DX (developer experience).
+- Modular structure: Components and services are organized for scalability and maintainability.
+
+
+## 🧠 Notes
 - The frontend is designed to be functional and modular, focusing on clean integration with the backend.
 - UI design is kept minimal to prioritize architecture, security, and maintainability.
 
-Let me know if you'd like to add a section about routing, state management, or deployment instructions. We can also include a short “Technical Decisions” block to explain why you chose Vite, Axios, and React.
+## 📈 Roadmap
+- ✅ v0.1 – Public listings and admin dashboard
+- 🧪 v0.2 – Chat integration and user roles
+- 🔮 v0.3 – Microfrontend architecture (optional)
+
+## 📬 Contact
+Author: Flavio
+Location: Barcelona, Cataluña, España
+Email: [flaviodavirro@gmail.com]
+LinkedIn: linkedin.com/in/flavio-augusto-davirro
+GitHub: github.com/FlavioKde
+
+
 
 
 
