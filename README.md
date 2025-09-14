@@ -105,8 +105,8 @@ The app will be available at http://localhost:5173 by default.
 Author: Flavio
 Location: Barcelona, Cataluña, España
 Email: [flaviodavirro@gmail.com]
-LinkedIn: linkedin.com/in/flavio-augusto-davirro
-GitHub: github.com/FlavioKde
+LinkedIn: [linkedin.com/in/flavio-augusto-davirro]
+GitHub: [github.com/FlavioKde]
 
 
 
