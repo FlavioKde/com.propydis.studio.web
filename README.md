@@ -1,4 +1,13 @@
-# React + Vite
+# com.propydis.stuio.web
+
+## web application for architecture
+
+```text
+This frontend is part of the application propydis.studi.com, and is built with React and Vite. It connects with the backend developed in Spring Boot through a REST API, and displays information about projects and properties of the studio.
+
+```
+
+
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
