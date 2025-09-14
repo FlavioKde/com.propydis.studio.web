@@ -7,7 +7,7 @@ This frontend is part of the application propydis.studi.com, and is built with R
 It connects with the backend developed in Spring Boot through a REST API, and displays information about projects and properties of the studio.
 
 ```
-🚀 **## Tech Stack**
+🚀 ## ** Tech Stack**
 
 - **React** – Main library to build the interface.
 - **Vite** – Fast and modern development environment.
