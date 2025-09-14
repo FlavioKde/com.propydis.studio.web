@@ -1,4 +1,4 @@
-# com.propydis.studio.web
+# com.propydis.studio.web - frontend
 
 ## 📘 **web application for architecture**
 
@@ -23,7 +23,7 @@ It supports role-based access, adapting the interface based on whether the user 
 - **Vite** – Fast and modern development environment.
 - **Axios** – To make HTTP requests to the backend.
 - **React Router** – For navigation between views.
-- **CSS Modules** / Tailwind /.
+- **CSS Modules** / Tailwind / Styled Components – Depending on implementation.
 
 ## 🔗 **Connecting to the Backend**
 
@@ -39,13 +39,17 @@ axios.get(`${import.meta.env.VITE_API_URL}/api/projects`);
 
 ```
 
-**warning**⚠️ Ensure CORS is properly configured in the backend to allow requests from the frontend domain. If using cookies or tokens, set withCredentials: true in Axios and configure the backend accordingly.
+⚠️ **warning**  Ensure CORS is properly configured in the backend to allow requests from the frontend domain. If using cookies or tokens, set withCredentials: true in Axios and configure the backend accordingly.
 
 
 ## 📦 **Local Setup**
 
 ```bash
 npm install
+
+```
+
+```bash
 npm run dev
 
 ```
@@ -55,11 +59,18 @@ The app runs on http://localhost:5173 by default.
 
 🔧 Environment Variables
 To keep backend URLs configurable, use a .env file:
+
+```text
 VITE_API_URL=https://propydis-backend.onrender.com
 
+```
 
 And access it in your code like this:
+
+```bash
 axios.get(`${import.meta.env.VITE_API_URL}/api/projects`);
+
+```
 
 ## 📥 **Cloning the Project**
 
@@ -111,6 +122,8 @@ Email: [flaviodavirro@gmail.com]
 LinkedIn: [www.linkedin.com/in/flavio-augusto-davirro]
 
 GitHub: [https://github.com/FlavioKde]
+
+# “Built with intention, improved through iteration – Kaizen in code.”
 
 
 
