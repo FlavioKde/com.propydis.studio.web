@@ -1,9 +1,10 @@
-# com.propydis.stuio.web
+# com.propydis.studio.web
 
 ## web application for architecture
 
 ```text
-This frontend is part of the application propydis.studi.com, and is built with React and Vite. It connects with the backend developed in Spring Boot through a REST API, and displays information about projects and properties of the studio.
+This frontend is part of the application propydis.studi.com, and is built with React and Vite. 
+It connects with the backend developed in Spring Boot through a REST API, and displays information about projects and properties of the studio.
 
 ```
 
