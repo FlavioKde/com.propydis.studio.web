@@ -110,7 +110,7 @@ Email: [flaviodavirro@gmail.com]
 
 LinkedIn: [linkedin.com/in/flavio-augusto-davirro]
 
-GitHub: [github.com/FlavioKde]
+GitHub: [https://github.com/FlavioKde]
 
 
 
